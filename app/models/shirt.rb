@@ -1,6 +1,6 @@
 class Shirt < ApplicationRecord
   has_many :orders
-  has_many :users, through: :orders
+  belongs_to :user
 
   validates :name, presence: true, length: { minimum: 3 }
   validates :size, presence: true
@@ -10,5 +10,4 @@ class Shirt < ApplicationRecord
   validates :team, presence: true
   validates :year, presence: true
   validates :description, presence: true
-  validates :rating_assessment, presence: true
 end

@@ -1,0 +1,6 @@
+class AddUserAndShirtToOrders < ActiveRecord::Migration[7.1]
+  def change
+    add_reference :orders, :user, null: false, foreign_key: true
+    add_reference :orders, :shirt, null: false, foreign_key: true
+  end
+end

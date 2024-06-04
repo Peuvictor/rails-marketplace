@@ -9,6 +9,20 @@ class ShirtsController < ApplicationController
   def show
   end
 
+  def create
+    @shirt = Shirt.new(shirt_params)
+    @shirt.user_id = current_user.id
+    if @shirt.save
+      redirect_to shirts_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def new
+    @shirt = Shirt.new
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -18,6 +32,6 @@ class ShirtsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def shirt_params
-    params.require(:shirt).permit(:name, :price, :description)
+    params.require(:shirt).permit(:name, :price, :description, :country, :year, :team, :size, :color, :user_id)
   end
 end

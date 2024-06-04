@@ -1,6 +1,6 @@
 class ShirtsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_shirt, only: [:show]
+  before_action :set_shirt, only: [:show, :destroy]
 
   def index
     @shirts = Shirt.all
@@ -8,6 +8,12 @@ class ShirtsController < ApplicationController
 
   def show
   end
+
+  def new
+    @shirt = Shirt.new
+  end
+
+  def edit; end
 
   def create
     @shirt = Shirt.new(shirt_params)
@@ -19,8 +25,17 @@ class ShirtsController < ApplicationController
     end
   end
 
-  def new
-    @shirt = Shirt.new
+  def update
+    if @shirt.update(shirt_params)
+      redirect_to shirts_path, notice: 'shirt was successfully updated.', status: :see_other
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @shirt.destroy!
+    redirect_to shirts_path, notice: 'shirt was successfully destroyed.', status: :see_other
   end
 
   private

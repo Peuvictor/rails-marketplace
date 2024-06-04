@@ -7,3 +7,5 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Shirt.create!(name: 'Camisa Cruzeiro', size: "GG", color: "Azul", price:  300, country: "Brasil", team: "Cruzeiro", year: 2023, description: "Uniforme III Cruzeiro 2023", rating_assessment: 10)
+Shirt.create!(name: 'Camisa Vasco', size: "GG", color: "Azul", price: 400, country: "Brasil", team: "Vasco", year: 2010, description: "Uniforme III Cruzeiro 2023", rating_assessment: 10)

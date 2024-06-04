@@ -4,3 +4,8 @@
 <h2>Shop now</h2>
 
 <%= render 'list', shirts: @shirts %>
+
+<% @shirts.each do |shirt| %>
+<% end %>
+
+<%= link_to "Inserir nova camisa", new_shirt_path %>

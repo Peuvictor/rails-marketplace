@@ -1,0 +1,7 @@
+<p style="color: green"><%= notice %></p>
+
+<% if @shirt %>
+  <%= render partial: 'shirt', locals: { shirt: @shirt } %>
+<% else %>
+  <p>Shirt not found</p>
+<% end %>

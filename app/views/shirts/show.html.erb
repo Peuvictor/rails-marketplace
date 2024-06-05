@@ -2,14 +2,21 @@
 
 <% if @shirt %>
   <%= render partial: 'shirt', locals: { shirt: @shirt } %>
-  <!-- Add the button here -->
-  <%= link_to "comprar", checkout_orders_path(shirt_id: @shirt.id, price: @shirt.price), class: "btn btn-primary" %><br>
-  <% else %>
+
+  <!-- Buy button -->
+  <%= link_to "Buy", checkout_orders_path(shirt_id: @shirt.id), class: "btn btn-primary" %><br><br>
+
+  <% if current_user == @shirt.user %>
+    <!-- Edit shirt link -->
+    <%= link_to "Edit this shirt", edit_shirt_path(@shirt), class: "btn btn-secondary" %><br><br>
+
+    <!-- Delete shirt button -->
+    <%= button_to "Delete this shirt", @shirt, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %><br><br>
+  <% end %>
+
+<% else %>
   <p>Shirt not found</p>
-<% end %><br>
+<% end %>
 
-<%= link_to "Edit this shirt", edit_shirt_path(@shirt)%><br>
-
-<%= link_to "Back to shirts", shirts_path %>
-<br><br>
-<%= button_to "Delete this shirt", @shirt, method: :delete, class: "btn btn-warning"%>
+<!-- Link to go back to shirts list -->
+<%= link_to "Back to shirts", shirts_path, class: "btn btn-info" %>

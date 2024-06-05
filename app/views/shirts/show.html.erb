@@ -3,7 +3,7 @@
 <% if @shirt %>
   <%= render partial: 'shirt', locals: { shirt: @shirt } %>
   <!-- Add the button here -->
-  <%= link_to "comprar", checkout_orders_path(shirt_id: @shirt.id, price: @shirt.price), class: "btn btn-primary" %><br>
+  <%= link_to "comprar", checkout_orders_path(shirt_id: @shirt.id), class: "btn btn-primary" %><br>
   <% else %>
   <p>Shirt not found</p>
 <% end %><br>

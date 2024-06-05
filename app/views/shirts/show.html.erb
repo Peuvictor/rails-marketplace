@@ -6,6 +6,8 @@
   <%= link_to "comprar", checkout_orders_path(shirt_id: @shirt.id, price: @shirt.price), class: "btn btn-primary" %>
   <% else %>
   <p>Shirt not found</p>
-<% end %>
+<% end %><br>
+
+<br><%= button_to "Edit this shirt", edit_shirt_path(@shirt) %><br>
 
 <%= button_to "Delete this shirt", @shirt, method: :delete %>

@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def checkout
     if @shirt.present?
-      @order = Order.new(shirt: @shirt, total_price: @shirt.price)
+      @order = Order.new(shirt: @shirt)
       if @order.save
         flash[:success] = "Pedido criado com sucesso!"
         redirect_to root_path

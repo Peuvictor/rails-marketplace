@@ -8,6 +8,6 @@
   <p>Shirt not found</p>
 <% end %><br>
 
-<br><%= button_to "Edit this shirt", edit_shirt_path(@shirt) %><br>
+<br><%= button_to "Edit this shirt", @shirt, method: :update, class: "btn btn-warning"%><br>
 
 <%= button_to "Delete this shirt", @shirt, method: :delete %>

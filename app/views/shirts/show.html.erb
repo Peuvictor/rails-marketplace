@@ -3,11 +3,13 @@
 <% if @shirt %>
   <%= render partial: 'shirt', locals: { shirt: @shirt } %>
   <!-- Add the button here -->
-  <%= link_to "comprar", checkout_orders_path(shirt_id: @shirt.id, price: @shirt.price), class: "btn btn-primary" %>
+  <%= link_to "comprar", checkout_orders_path(shirt_id: @shirt.id, price: @shirt.price), class: "btn btn-primary" %><br>
   <% else %>
   <p>Shirt not found</p>
 <% end %><br>
 
-<br><%= button_to "Edit this shirt", edit_shirt_path(@shirt) %><br>
+<%= link_to "Edit this shirt", edit_shirt_path(@shirt)%><br>
 
-<%= button_to "Delete this shirt", @shirt, method: :delete %>
+<%= link_to "Back to shirts", shirts_path %>
+<br><br>
+<%= button_to "Delete this shirt", @shirt, method: :delete, class: "btn btn-warning"%>

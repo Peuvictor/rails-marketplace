@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:checkout]
   before_action :set_shirt, only: [:checkout]
 
   def checkout

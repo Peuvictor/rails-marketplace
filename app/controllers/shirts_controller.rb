@@ -50,3 +50,4 @@ class ShirtsController < ApplicationController
     params.require(:shirt).permit(:name, :price, :description, :country, :year, :team, :size, :color, :user_id)
   end
 end
+

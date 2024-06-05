@@ -1,0 +1,24 @@
+<h1>Checkout</h1>
+
+<div class="shirt-details">
+  <h2><%= @shirt.name %></h2>
+  <p><strong>Preço:</strong> <%= number_to_currency(@shirt.price) %></p>
+  <p><strong>Descrição:</strong> <%= @shirt.description %></p>
+</div>
+
+<div class="payment-form">
+  <%= form_tag checkout_orders_path do %>
+
+    <!-- Campo para escolher a forma de pagamento -->
+    <div class="form-group">
+      <%= label_tag :payment_method, "Forma de pagamento:" %>
+      <%= select_tag :payment_method, options_for_select(["Cartão de Crédito", "Boleto Bancário", "PIX"]), class: 'form-control', required: true %>
+    </div>
+
+    <!-- Botão de envio do formulário -->
+    <%= submit_tag 'Finalizar Compra', class: 'btn btn-primary' %>
+
+    <!-- Botão para voltar à home -->
+    <%= link_to 'Voltar à Home', root_path, class: 'btn btn-secondary' %>
+  <% end %>
+</div>

@@ -4,6 +4,7 @@
   <h2><%= @shirt.name %></h2>
   <p><strong>Preço:</strong> <%= number_to_currency(@shirt.price) %></p>
   <p><strong>Descrição:</strong> <%= @shirt.description %></p>
+  <p><strong>Cadastrado por:</strong> <%= @shirt.user.first_name %> <%= @shirt.user.last_name %> <p><strong>E-mail:</strong>   <%= @shirt.user.email%></p>
 </div>
 
 <div class="payment-form">

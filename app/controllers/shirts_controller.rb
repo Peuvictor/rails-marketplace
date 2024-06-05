@@ -1,6 +1,6 @@
 class ShirtsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_shirt, only: [:show, :destroy]
+  before_action :set_shirt, only: [:show, :destroy, :edit, :update]
 
   def index
     @shirts = Shirt.all
@@ -13,16 +13,17 @@ class ShirtsController < ApplicationController
     @shirt = Shirt.new
   end
 
-  def edit; end
+  def edit
+  end
 
   def create
     @shirt = Shirt.new(shirt_params)
     @shirt.user_id = current_user.id
-    if @shirt.save
-      redirect_to shirts_path
-    else
-      render :new, status: :unprocessable_entity
-    end
+      if @shirt.save
+        redirect_to shirts_path
+      else
+        render :new, status: :unprocessable_entity
+      end
   end
 
   def update
@@ -50,4 +51,3 @@ class ShirtsController < ApplicationController
     params.require(:shirt).permit(:name, :price, :description, :country, :year, :team, :size, :color, :user_id)
   end
 end
-

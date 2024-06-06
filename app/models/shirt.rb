@@ -1,4 +1,7 @@
+
 class Shirt < ApplicationRecord
+  include PgSearch::Model
+
   has_many :orders
   belongs_to :user
 
@@ -10,4 +13,9 @@ class Shirt < ApplicationRecord
   validates :team, presence: true
   validates :year, presence: true
   validates :description, presence: true
+
+  pg_search_scope :search_by_attributes,
+                  against: { name: 'A', description: 'B', country: 'C', team: 'B', year: 'D', size: 'C', color: 'D' },
+                  using: { tsearch: { prefix: true } }
+
 end

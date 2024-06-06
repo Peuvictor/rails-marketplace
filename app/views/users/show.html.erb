@@ -1,0 +1,25 @@
+<h1>User Profile</h1>
+
+<p><strong>Name:</strong> <%= @user.first_name %> <%= @user.last_name %></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Joined on:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
+
+<% if user_signed_in? && @user == current_user %>
+  <%= link_to 'Add New Shirt', new_shirt_path %>
+<% end %>
+
+<h2>Shirts for Sale</h2>
+<% if @shirts.present? %>
+  <ul>
+    <% @shirts.each do |shirt| %>
+      <li>
+        <strong><%= shirt.name %></strong><br>
+        <%= shirt.description %><br>
+        <%= number_to_currency(shirt.price) %><br>
+        <%= link_to 'View Details', shirt_path(shirt) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No shirts available.</p>
+<% end %>

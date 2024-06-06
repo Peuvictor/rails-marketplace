@@ -20,14 +20,15 @@
       <%= image_tag "banner.png", alt: "Banner", class: "img-fluid"%>
     </div>
 
-    <!-- Main Content -->
-    <div class="container">
-      <%= yield %>
+      <!-- Main Content -->
+      <div class="container">
+        <%= yield %>
+
+      <!-- Flash Messages -->
+      <%= render "shared/flashes" %>
+
     </div>
-
-    <!-- Flash Messages -->
-    <%= render "shared/flashes" %>
-
     <%= render "shared/footer" %>
+
   </body>
 </html>

@@ -6,16 +6,11 @@
   <%= submit_tag "Search" %>
 <% end %>
 
-<h3>Shop now</h3>
-
-<%= render 'list', shirts: @shirts %>
-
-<% @shirts.each do |shirt| %>
-<% end %>
-
-<%= link_to "Insert new shirt", new_shirt_path %>
-
-
-<% if current_user %>
+<div class="Homepage">
+  <h2>Shop now</h2>
+    <%= render 'list', shirts: @shirts %>
+  <%= link_to "Insert new shirt", new_shirt_path %>
+  <% if current_user %>
   <%= link_to "View My Profile", user_path(current_user.id) %>
-<% end %>
+  <% end %>
+</div>

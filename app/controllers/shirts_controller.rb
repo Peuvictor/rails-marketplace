@@ -1,6 +1,6 @@
 class ShirtsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_shirt, only: [:show, :destroy, :edit, :update]
+  before_action :set_shirt, only: [:show, :destroy, :edit, :update, :purchase]
   before_action :authorize_user!, only: [:update, :destroy]
 
   def index
@@ -25,7 +25,7 @@ class ShirtsController < ApplicationController
     @shirt = Shirt.new(shirt_params)
     @shirt.user_id = current_user.id
     if @shirt.save
-      redirect_to shirts_path
+      redirect_to shirts_path, notice: 'Shirt was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,8 +40,13 @@ class ShirtsController < ApplicationController
   end
 
   def destroy
-    @shirt.destroy!
+    @shirt.destroy
     redirect_to shirts_path, notice: 'Shirt was successfully destroyed.', status: :see_other
+  end
+
+  def purchase
+    @shirt.destroy
+    redirect_to root_path, notice: 'Purchase Made.', status: :see_other
   end
 
   private

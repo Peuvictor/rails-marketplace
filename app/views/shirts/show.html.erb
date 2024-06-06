@@ -3,6 +3,12 @@
 <% if @shirt %>
   <%= render partial: 'shirt', locals: { shirt: @shirt } %>
 
+  <% if @shirt.photos.attached? %>
+    <% @shirt.photos.each do |photo| %>
+      <%= image_tag url_for(photo), height: 360, width: 360, crop: :fill %>
+    <% end %>
+  <% end %>
+
   <!-- Buy button -->
   <%= link_to "Buy", checkout_orders_path(shirt_id: @shirt.id), class: "btn btn-primary" %><br><br>
 

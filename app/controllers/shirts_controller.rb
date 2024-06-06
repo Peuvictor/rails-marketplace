@@ -51,7 +51,7 @@ class ShirtsController < ApplicationController
   end
 
   def shirt_params
-    params.require(:shirt).permit(:name, :price, :description, :country, :year, :team, :size, :color, :user_id, :photo)
+    params.require(:shirt).permit(:name, :price, :description, :country, :year, :team, :size, :color, :user_id, photos: [])
   end
 
   def authorize_user!

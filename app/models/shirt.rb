@@ -1,8 +1,8 @@
 
 class Shirt < ApplicationRecord
   include PgSearch::Model
-  has_one_attached :photo
-
+  has_many_attached :photos
+  
   has_many :orders
   belongs_to :user
 

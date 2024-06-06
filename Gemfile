@@ -52,7 +52,7 @@ gem "sassc-rails"
 gem "devise"
 gem "pg_search"
 gem "dotenv-rails"
-
+gem "cloudinary"
 
 group :development, :test do
   gem "dotenv-rails"

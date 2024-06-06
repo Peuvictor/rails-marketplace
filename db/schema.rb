@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_06_145043) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_06_153157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,7 +47,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_145043) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "shirt_id", null: false
+    t.integer "quantity"
+    t.decimal "total_price"
     t.date "acquisition_date"
+    t.integer "payment_method"
     t.index ["shirt_id"], name: "index_orders_on_shirt_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -67,6 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_145043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.jsonb "photos"
     t.index ["user_id"], name: "index_shirts_on_user_id"
   end
 

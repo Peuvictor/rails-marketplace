@@ -82,3 +82,4 @@ end
 gem 'ffi', '~> 1.16.3'
 gem "dotenv-rails"
 gem "cloudinary"
+

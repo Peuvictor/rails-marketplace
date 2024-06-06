@@ -55,7 +55,6 @@ gem "pg_search"
 
 
 group :development, :test do
-  gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
 end
@@ -80,6 +79,5 @@ group :test do
 end
 
 gem 'ffi', '~> 1.16.3'
-gem "dotenv-rails"
+gem 'dotenv-rails', groups: [:development, :test]
 gem "cloudinary"
-

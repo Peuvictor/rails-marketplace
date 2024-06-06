@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "shirts#index"
 
-  resources :users, only: [:index, :show] 
+  resources :users, only: [:index, :show]
   resources :shirts
   resources :orders do
     collection do

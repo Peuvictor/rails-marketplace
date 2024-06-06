@@ -9,15 +9,13 @@
 <% end %>
 
 <h2>Shirts for Sale</h2>
-
-<% if @shirts.any? %>
+<% if @shirts.present? %>
   <ul>
     <% @shirts.each do |shirt| %>
       <li>
         <strong><%= shirt.name %></strong><br>
         <%= shirt.description %><br>
-        <%= number_to_currency(shirt.price) %>
-        <br>
+        <%= number_to_currency(shirt.price) %><br>
         <%= link_to 'View Details', shirt_path(shirt) %>
       </li>
     <% end %>

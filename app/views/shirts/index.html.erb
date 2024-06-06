@@ -14,3 +14,7 @@
 <% end %>
 
 <%= link_to "Insert new shirt", new_shirt_path %>
+
+<% if current_user %>
+  <%= link_to "View My Profile", user_path(current_user.id) %>
+<% end %>

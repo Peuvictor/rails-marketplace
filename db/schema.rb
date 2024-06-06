@@ -47,7 +47,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_06_145043) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "shirt_id", null: false
+    t.integer "quantity"
+    t.decimal "total_price"
     t.date "acquisition_date"
+    t.integer "payment_method"
     t.index ["shirt_id"], name: "index_orders_on_shirt_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end

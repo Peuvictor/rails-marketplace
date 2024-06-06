@@ -15,13 +15,18 @@
     <!-- Navbar -->
     <%= render "shared/navbar" %>
 
+    <!-- Banner -->
+    <div class="banner">
+      <%= image_tag "banner.png", alt: "Banner", class: "img-fluid"%>
+    </div>
+
       <!-- Main Content -->
       <div class="container">
         <%= yield %>
 
       <!-- Flash Messages -->
       <%= render "shared/flashes" %>
-      
+
     </div>
     <%= render "shared/footer" %>
 

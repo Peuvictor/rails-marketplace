@@ -4,7 +4,11 @@ class ShirtsController < ApplicationController
   before_action :authorize_user!, only: [:update, :destroy]
 
   def index
-    @shirts = Shirt.all
+    if params[:query].present?
+      @shirts = Shirt.search_by_attributes(params[:query])
+    else
+      @shirts = Shirt.all
+    end
   end
 
   def show
@@ -41,6 +45,7 @@ class ShirtsController < ApplicationController
   end
 
   private
+
   def set_shirt
     @shirt = Shirt.find(params[:id])
   end

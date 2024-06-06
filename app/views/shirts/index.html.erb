@@ -1,5 +1,10 @@
 <p style="color: green"><%= notice %></p>
 
+<%= form_with url: shirts_path, method: :get, local: true do %>
+  <%= label_tag :query, "Search for a shirt:" %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag "Search" %>
+<% end %>
 
 <h3>Shop now</h3>
 

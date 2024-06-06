@@ -2,17 +2,17 @@
 class Shirt < ApplicationRecord
   include PgSearch::Model
   has_many_attached :photos
-  
+
   has_many :orders
   belongs_to :user
 
-  validates :name, presence: true, length: { minimum: 3 }
+  validates :name, presence: true, length: { minimum: 3, maximum: 25 }
   validates :size, presence: true
   validates :color, presence: true
   validates :price, presence: true
   validates :country, presence: true
   validates :team, presence: true
-  validates :year, presence: true
+  validates :year, presence: true, length: { minimum: 4, maximum: 4 }
   validates :description, presence: true
 
   pg_search_scope :search_by_attributes,

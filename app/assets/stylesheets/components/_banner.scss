@@ -3,9 +3,10 @@
   height: 440px;
   text-align: center;
   margin-bottom: 20px;
-  background-size: cover;
+  background-size: contain;
   position: relative;
-  background-position: top; /* Centraliza a imagem */
+  background-position: top;
+  background-attachment: fixed;
 
 
   h1 {
@@ -33,7 +34,7 @@
     padding: 10px;
     font-size: 28px;
     border: none;
-    background-color: #a9aaa8;
+    background-color: #fffef9;
     border-radius: 8px;
     box-sizing: border-box;
   }
@@ -42,7 +43,7 @@
     padding: 10px;
     border: none;
     font-size: 28px;
-    background-color: #3c4927;
+    //background-color: #3c4927;
     color: #fffef9;
     cursor: pointer;
     transition: background-color 0.3s ease;

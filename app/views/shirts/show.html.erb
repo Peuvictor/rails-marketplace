@@ -1,28 +1,40 @@
 <p style="color: green"><%= notice %></p>
 
 <% if @shirt %>
-  <%= render partial: 'shirt', locals: { shirt: @shirt } %>
-
-  <% if @shirt.photos.attached? %>
-    <% @shirt.photos.each do |photo| %>
-      <%= image_tag url_for(photo), height: 360, width: 360, crop: :fill %>
-    <% end %>
-  <% end %>
-
-  <!-- Buy button -->
-  <%= link_to "Buy", checkout_orders_path(shirt_id: @shirt.id), class: "btn btn-primary" %><br><br>
-
-  <% if current_user == @shirt.user %>
-    <!-- Edit shirt link -->
-    <%= link_to "Edit this shirt", edit_shirt_path(@shirt), class: "btn btn-secondary" %><br><br>
-
-    <!-- Delete shirt button -->
-    <%= button_to "Delete this shirt", @shirt, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %><br><br>
-  <% end %>
-
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 d-flex flex-column align-items-center">
+        <% if @shirt.photos.attached? %>
+          <% @shirt.photos.each do |photo| %>
+            <%= image_tag url_for(photo), class: "img-fluid mb-3", style: "max-height: 500px;" %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="col-md-4 d-flex flex-column justify-content-center text-center">
+        <!-- Render Shirt details in the center -->
+        <%= render partial: 'shirt', locals: { shirt: @shirt }, class: "mb-3" %>
+      </div>
+      <div class="col-md-4 d-flex flex-column justify-content-between">
+        <div class="text-center">
+          <!-- Buy button -->
+          <%= link_to checkout_orders_path(shirt_id: @shirt.id), class: "btn btn-success btn-block mb-3" do %>
+            <i class="fas fa-shopping-cart"></i> Buy
+          <% end %>
+          <% if current_user == @shirt.user %>
+            <!-- Edit shirt link -->
+            <%= link_to edit_shirt_path(@shirt), class: "btn btn-secondary btn-block mb-3" do %>
+              <i class="fas fa-edit"></i> Edit
+            <% end %>
+            <!-- Delete shirt button with icon -->
+            <%= link_to shirt_path(@shirt), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-block mb-3" do %>
+              <i class="fas fa-trash-alt"></i> Delete
+            <% end %>
+          <% end %>
+        </div>
+        <%= link_to "Back to shirts", shirts_path, class: "btn btn-info btn-block mt-3" %>
+      </div>
+    </div>
+  </div>
 <% else %>
   <p>Shirt not found</p>
 <% end %>
-
-<!-- Link to go back to shirts list -->
-<%= link_to "Back to shirts", shirts_path, class: "btn btn-info" %>

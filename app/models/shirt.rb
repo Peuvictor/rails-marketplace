@@ -6,7 +6,7 @@ class Shirt < ApplicationRecord
   has_many :orders, dependent: :destroy
   belongs_to :user
 
-  validates :name, presence: true, length: { minimum: 3, maximum: 25 }
+  validates :name, presence: true, length: { minimum: 3, maximum: 20 }
   validates :size, presence: true
   validates :color, presence: true
   validates :price, presence: true

@@ -1,0 +1,8 @@
+<div class="banner" style="background-image: url('<%= asset_path('banner.png') %>');">
+  <h1>Compre agora a camisa do seu time do coração</h1>
+
+  <%= form_with url: shirts_path, method: :get, local: true, class: "form" do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Tabajara FC" %>
+  <%= submit_tag "Search", class: "btn btn-primary"  %>
+  <% end %>
+</div>

@@ -45,8 +45,10 @@ class ShirtsController < ApplicationController
   end
 
   def purchase
+    # Atualizar ou excluir os registros dependentes
+    @shirt.orders.update_all(shirt_id: nil) # ou você pode excluir os registros relacionados
     @shirt.destroy
-    redirect_to root_path, notice: 'Purchase Made.', status: :see_other
+    redirect_to root_path, notice: 'Shirt was successfully purchased .', status: :see_other
   end
 
   private

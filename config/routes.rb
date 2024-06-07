@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post 'purchase'
     end
   end
+
   resources :orders do
     collection do
       get 'checkout'

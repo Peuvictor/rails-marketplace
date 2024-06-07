@@ -4,18 +4,32 @@ class ShirtsController < ApplicationController
   before_action :authorize_user!, only: [:update, :destroy]
 
   def index
-    @shirts = if params[:query].present?
-                Shirt.search_by_attributes(params[:query])
-              else
-                Shirt.all
-              end
+    @shirts = Shirt.all
 
-    if params[:country].present?
+    # Filtro por query
+    @shirts = @shirts.search_by_attributes(params[:query]) if params[:query].present?
+
+    # Filtro por país
+    if params[:country].present? && params[:country] != "Todos os Países"
       normalized_country = params[:country].downcase
-      if normalized_country == "brasil"
+      if normalized_country == "outros países"
+        @shirts = @shirts.where.not("lower(country) IN (?)", ["brasil", "espanha", "inglaterra", "italia"])
+      else
         @shirts = @shirts.where("lower(country) = ?", normalized_country)
-      elsif normalized_country == "other countries"
-        @shirts = @shirts.where("lower(country) != ?", "brasil")
+      end
+    end
+
+    # Filtro por tamanho
+    if params[:size].present? && params[:size] != "Todos os Tamanhos"
+      @shirts = @shirts.where(size: params[:size])
+    end
+
+    # Filtro por time
+    if params[:team].present? && params[:team] != "Todos os Times"
+      if params[:team].downcase == "outros times"
+        @shirts = @shirts.where.not("lower(team) IN (?)", ["cruzeiro", "flamengo", "vasco", "corinthians", "barcelona", "real madrid", "manchester", "juventus"])
+      else
+        @shirts = @shirts.where("lower(team) = ?", params[:team].downcase)
       end
     end
   end

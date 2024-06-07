@@ -18,15 +18,8 @@
     font-size: 3em;
     text-align: center;
     margin-bottom: 12px;
-
-    @media (max-width: 768px) {
-      font-size: 24px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 24px;
-    }
   }
+
 
   form {
     position: absolute;
@@ -36,15 +29,8 @@
     color: white;
     font-size: 32px;
     margin-top: 32px;
-
-    @media (max-width: 768px) {
-      font-size: 28px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 24px;
-    }
   }
+
 
   input[type="text"] {
     width: 300px;
@@ -54,17 +40,8 @@
     background-color: #fffef9;
     border-radius: 8px;
     box-sizing: border-box;
-
-    @media (max-width: 768px) {
-      width: 250px;
-      font-size: 24px;
-    }
-
-    @media (max-width: 480px) {
-      width: 200px;
-      font-size: 20px;
-    }
   }
+
 
   input[type="submit"] {
     padding: 10px;
@@ -74,17 +51,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 8px;
-
-    @media (max-width: 768px) {
-      font-size: 24px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 20px;
-    }
   }
 
   input[type="submit"]:hover {
     background-color: #858e79;
   }
+
 }

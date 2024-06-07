@@ -3,7 +3,7 @@ class Shirt < ApplicationRecord
   include PgSearch::Model
   has_many_attached :photos
 
-  has_many :orders
+  has_many :orders, dependent: :destroy
   belongs_to :user
 
   validates :name, presence: true, length: { minimum: 3, maximum: 25 }

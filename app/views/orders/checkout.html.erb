@@ -9,18 +9,12 @@
 </div>
 
 <div class="payment-form">
-  <%= form_tag checkout_orders_path do %>
-
-    <!-- Field to choose the payment method -->
+  <%= form_with url: purchase_shirt_path(@shirt), method: :post, local: true do |form| %>
     <div class="form-group">
-      <%= label_tag :payment_method, "Payment Method:" %>
-      <%= select_tag :payment_method, options_for_select(["Credit Card", "Bank Slip", "PIX"]), class: 'form-control', required: true %>
+      <%= form.label :payment_method, "Payment Method:" %>
+      <%= form.select :payment_method, options_for_select(["Credit Card", "Bank Slip", "PIX"]), class: 'form-control', required: true %>
     </div>
-
-    <!-- Form submission button -->
-    <%= submit_tag 'Complete Purchase', class: 'btn btn-primary' %>
-
-    <!-- Button to go back to the home page -->
+    <%= form.submit 'Complete Purchase', class: 'btn btn-primary' %>
     <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary' %>
   <% end %>
 </div>

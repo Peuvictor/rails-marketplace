@@ -1,13 +1,22 @@
 class ShirtsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_shirt, only: [:show, :destroy, :edit, :update]
+  before_action :set_shirt, only: [:show, :destroy, :edit, :update, :purchase]
   before_action :authorize_user!, only: [:update, :destroy]
 
   def index
-    if params[:query].present?
-      @shirts = Shirt.search_by_attributes(params[:query])
-    else
-      @shirts = Shirt.all
+    @shirts = if params[:query].present?
+                Shirt.search_by_attributes(params[:query])
+              else
+                Shirt.all
+              end
+
+    if params[:country].present?
+      normalized_country = params[:country].downcase
+      if normalized_country == "brasil"
+        @shirts = @shirts.where("lower(country) = ?", normalized_country)
+      elsif normalized_country == "other countries"
+        @shirts = @shirts.where("lower(country) != ?", "brasil")
+      end
     end
   end
 
@@ -25,7 +34,7 @@ class ShirtsController < ApplicationController
     @shirt = Shirt.new(shirt_params)
     @shirt.user_id = current_user.id
     if @shirt.save
-      redirect_to shirts_path
+      redirect_to shirts_path, notice: 'Shirt was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,8 +49,21 @@ class ShirtsController < ApplicationController
   end
 
   def destroy
-    @shirt.destroy!
+    @shirt.destroy
     redirect_to shirts_path, notice: 'Shirt was successfully destroyed.', status: :see_other
+  end
+
+  def purchase
+    @order = Order.new(shirt: @shirt, user: current_user, payment_method: params[:payment_method], acquisition_date: Time.now)
+    if @order.save
+      # Exclui os pedidos relacionados
+      Order.where(shirt_id: @shirt.id).delete_all
+      @shirt.destroy
+      redirect_to user_path(current_user), notice: 'Purchase was successfully completed.'
+    else
+      Rails.logger.error "Order creation failed: #{@order.errors.full_messages.join(', ')}"
+      redirect_to shirt_path(@shirt), alert: 'Error completing purchase.'
+    end
   end
 
   private

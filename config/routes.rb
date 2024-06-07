@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   root to: "shirts#index"
 
   resources :users, only: [:index, :show]
-  resources :shirts
+  resources :shirts do
+    member do
+      post 'purchase'
+    end
+  end
   resources :orders do
     collection do
       get 'checkout'

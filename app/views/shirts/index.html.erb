@@ -1,18 +1,32 @@
 <p style="color: green"><%= notice %></p>
 
 <div class="Homepage">
-<%= form_with url: shirts_path, method: :get, local: true do |form| %>
-  <div class="form-group">
-    <%= form.select :country, options_for_select(["Todos os Países", "Brasil", "Espanha", "Inglaterra", "Italia", "Outros Países"], params[:country]), prompt: "Selecione o País", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= form.select :size, options_for_select(["Todos os Tamanhos", "PP", "P", "M", "G", "GG"], params[:size]), prompt: "Selecione o Tamanho", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= form.select :team, options_for_select(["Todos os Times", "Cruzeiro", "Flamengo", "Vasco", "Corinthians", "Barcelona", "Real Madrid", "Manchester", "Juventus", "Outros Times"], params[:team]), prompt: "Selecione o Time", class: "form-control" %>
-  </div>
-  <%= form.submit "Search", class: "btn btn-primary" %>
-<% end %>
+
+  <%= form_with url: shirts_path, method: :get, local: true, class: "filter" do |form| %>
+    <div class="row" class="filter">
+      <div class="col-md-4 col-sm-6 col-lg-3">
+        <div class="form-group">
+          <%= form.select :country, options_for_select(["All Countries", "Brasil", "Espanha", "Inglaterra", "Italia", "Other Countries"], params[:country]), prompt: "Select Country", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-lg-3">
+        <div class="form-group">
+          <%= form.select :size, options_for_select(["All Sizes", "PP", "P", "M", "G", "GG"], params[:size]), prompt: "Select Size", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-lg-3">
+        <div class="form-group">
+          <%= form.select :team, options_for_select(["All Teams", "Cruzeiro", "Flamengo", "Vasco", "Corinthians", "Barcelona", "Real Madrid", "Manchester", "Juventus", "Other Teams"], params[:team]), prompt: "Select Team", class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6 col-lg-3">
+        <div class="form-group">
+          <%= form.submit "Search", class: "btn btn-primary btn-block" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 
   <%= render 'list', shirts: @shirts %>
   <%= link_to "Insert new shirt", new_shirt_path, class: "btn btn-primary" %>

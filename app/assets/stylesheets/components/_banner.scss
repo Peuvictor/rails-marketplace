@@ -9,8 +9,6 @@
   background-attachment: fixed;
   background-repeat: no-repeat;
 
-
-
   h1 {
     position: relative;
     top: 32%;
@@ -19,17 +17,20 @@
     color: white;
     font-size: 3em;
     text-align: center;
+    margin-bottom: 12px;
   }
+
 
   form {
     position: absolute;
     top: 50%;
     left: 40%;
-    transform: translate(-40%, -50%);
+    transform: translate(-70%, -50%);
     color: white;
     font-size: 32px;
     margin-top: 32px;
   }
+
 
   input[type="text"] {
     width: 300px;
@@ -41,18 +42,19 @@
     box-sizing: border-box;
   }
 
+
   input[type="submit"] {
     padding: 10px;
     border: none;
     font-size: 28px;
-    //background-color: #3c4927;
     color: #fffef9;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border-radius: 8px;
-    }
+  }
 
-    input[type="submit"]:hover {
+  input[type="submit"]:hover {
     background-color: #858e79;
   }
+
 }

@@ -10,19 +10,27 @@ class ShirtsController < ApplicationController
     @shirts = @shirts.search_by_attributes(params[:query]) if params[:query].present?
 
     # Filtro por país
-    if params[:country].present? && params[:country] != "All Countries"
+    if params[:country].present? && params[:country] != "Todos os Países"
       normalized_country = params[:country].downcase
-      @shirts = @shirts.where("lower(country) = ?", normalized_country)
+      if normalized_country == "outros países"
+        @shirts = @shirts.where.not("lower(country) IN (?)", ["brasil", "espanha", "inglaterra", "italia"])
+      else
+        @shirts = @shirts.where("lower(country) = ?", normalized_country)
+      end
     end
 
     # Filtro por tamanho
-    if params[:size].present? && params[:size] != "All Sizes"
+    if params[:size].present? && params[:size] != "Todos os Tamanhos"
       @shirts = @shirts.where(size: params[:size])
     end
 
     # Filtro por time
-    if params[:team].present? && params[:team] != "All Teams"
-      @shirts = @shirts.where(team: params[:team])
+    if params[:team].present? && params[:team] != "Todos os Times"
+      if params[:team].downcase == "outros times"
+        @shirts = @shirts.where.not("lower(team) IN (?)", ["cruzeiro", "flamengo", "vasco", "corinthians", "barcelona", "real madrid", "manchester", "juventus"])
+      else
+        @shirts = @shirts.where("lower(team) = ?", params[:team].downcase)
+      end
     end
   end
 

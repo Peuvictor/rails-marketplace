@@ -1,0 +1,11 @@
+.banner {
+  width: 100%;
+  text-align: center; /* Centraliza a imagem horizontalmente */
+  margin-bottom: 20px; /* Espaçamento abaixo do banner */
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4))
+}
+
+.banner img {
+  max-width: 100%;
+  height: auto; /* Mantém a proporção da imagem */
+}

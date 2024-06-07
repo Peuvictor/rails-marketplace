@@ -1,5 +1,5 @@
 // Specific CSS for your home-page
-body{
+.homepage{
   min-height: 400px;
 }
 .btn:hover{
@@ -10,13 +10,3 @@ body{
 .btn {
   border-radius: 4px;
 }
-
-.filter{
-  border: 1px solid red;
-}
-
-.form-group{
-  border: 1px solid blue;
-  border-radius: 4px;
-}
-

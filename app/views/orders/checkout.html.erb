@@ -1,20 +1,22 @@
-<h1>Checkout</h1>
+<div class="container">
+  <h1>Checkout</h1>
 
-<div class="shirt-details">
-  <h2><%= @shirt.name %></h2>
-  <p><strong>Price:</strong> <%= number_to_currency(@shirt.price) %></p>
-  <p><strong>Description:</strong> <%= @shirt.description %></p>
-  <p><strong>Listed by:</strong> <%= @shirt.user.first_name %> <%= @shirt.user.last_name %></p>
-  <p><strong>Email:</strong> <%= @shirt.user.email %></p>
-</div>
+  <div class="shirt-details">
+    <h2><%= @shirt.name %></h2>
+    <p><strong>Price:</strong> <%= number_to_currency(@shirt.price) %></p>
+    <p><strong>Description:</strong> <%= @shirt.description %></p>
+    <p><strong>Listed by:</strong> <%= @shirt.user.first_name %> <%= @shirt.user.last_name %></p>
+    <p><strong>Email:</strong> <%= @shirt.user.email %></p>
+  </div>
 
-<div class="payment-form">
-  <%= form_with url: purchase_shirt_path(@shirt), method: :post, local: true do |form| %>
-    <div class="form-group">
-      <%= form.label :payment_method, "Payment Method:" %>
-      <%= form.select :payment_method, options_for_select(["Credit Card", "Bank Slip", "PIX"]), class: 'form-control', required: true %>
-    </div>
-    <%= form.submit 'Complete Purchase', class: 'btn btn-primary' %>
-    <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary' %>
-  <% end %>
+  <div class="payment-form">
+    <%= form_with url: purchase_shirt_path(@shirt), method: :post, local: true do |form| %>
+      <div class="form-group">
+        <%= form.label :payment_method, "Payment Method:" %>
+        <%= form.select :payment_method, options_for_select(["Credit Card", "Bank Slip", "PIX"]), class: 'form-control', required: true %>
+      </div>
+      <%= form.submit 'Complete Purchase', class: 'btn btn-primary' %>
+      <%= link_to 'Back to Home', root_path, class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
 </div>

@@ -16,17 +16,10 @@
     <!-- Navbar -->
     <%= render "shared/navbar" %>
 
-    <!-- Banner -->
-    <%= render "shared/banner" %>
-
-      <!-- Main Content -->
-      <div class="container">
-        <%= yield %>
-
-      <!-- Flash Messages -->
-      <%= render "shared/flashes" %>
-
-    </div>
+    <!-- Main Content -->
+    <!-- Flash Messages -->
+    <%= render "shared/flashes" %>
+    <%= yield %>
     <%= render "shared/footer" %>
 
   </body>

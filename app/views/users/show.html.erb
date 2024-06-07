@@ -1,17 +1,19 @@
-<h1><%= @user.first_name %> <%= @user.last_name %></h1>
-<p>Email: <%= @user.email %></p>
+<div class="container">
+  <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+  <p>Email: <%= @user.email %></p>
 
 
-<% if @user.shirts.any? %>
-  <ul>
-    <% @user.shirts.each do |shirt| %>
-      <li>
-        <%= shirt.name %> - <%= number_to_currency(shirt.price) %>
-        <%= link_to 'Edit', edit_shirt_path(shirt) %>
-        <%= link_to 'Delete', shirt, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No shirts for sale yet.</p>
-<% end %>
+  <% if @user.shirts.any? %>
+    <ul>
+      <% @user.shirts.each do |shirt| %>
+        <li>
+          <%= shirt.name %> - <%= number_to_currency(shirt.price) %>
+          <%= link_to 'Edit', edit_shirt_path(shirt) %>
+          <%= link_to 'Delete', shirt, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No shirts for sale yet.</p>
+  <% end %>
+</div>

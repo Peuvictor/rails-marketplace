@@ -4,19 +4,25 @@ class ShirtsController < ApplicationController
   before_action :authorize_user!, only: [:update, :destroy]
 
   def index
-    @shirts = if params[:query].present?
-                Shirt.search_by_attributes(params[:query])
-              else
-                Shirt.all
-              end
+    @shirts = Shirt.all
 
-    if params[:country].present?
+    # Filtro por query
+    @shirts = @shirts.search_by_attributes(params[:query]) if params[:query].present?
+
+    # Filtro por país
+    if params[:country].present? && params[:country] != "All Countries"
       normalized_country = params[:country].downcase
-      if normalized_country == "brasil"
-        @shirts = @shirts.where("lower(country) = ?", normalized_country)
-      elsif normalized_country == "other countries"
-        @shirts = @shirts.where("lower(country) != ?", "brasil")
-      end
+      @shirts = @shirts.where("lower(country) = ?", normalized_country)
+    end
+
+    # Filtro por tamanho
+    if params[:size].present? && params[:size] != "All Sizes"
+      @shirts = @shirts.where(size: params[:size])
+    end
+
+    # Filtro por time
+    if params[:team].present? && params[:team] != "All Teams"
+      @shirts = @shirts.where(team: params[:team])
     end
   end
 

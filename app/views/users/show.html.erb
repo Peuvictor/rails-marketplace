@@ -1,25 +1,17 @@
-<h1>User Profile</h1>
+<h1><%= @user.first_name %> <%= @user.last_name %></h1>
+<p>Email: <%= @user.email %></p>
 
-<p><strong>Name:</strong> <%= @user.first_name %> <%= @user.last_name %></p>
-<p><strong>Email:</strong> <%= @user.email %></p>
-<p><strong>Joined on:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
 
-<% if user_signed_in? && @user == current_user %>
-  <%= link_to 'Add New Shirt', new_shirt_path %>
-<% end %>
-
-<h2>Shirts for Sale</h2>
-<% if @shirts.present? %>
+<% if @user.shirts.any? %>
   <ul>
-    <% @shirts.each do |shirt| %>
+    <% @user.shirts.each do |shirt| %>
       <li>
-        <strong><%= shirt.name %></strong><br>
-        <%= shirt.description %><br>
-        <%= number_to_currency(shirt.price) %><br>
-        <%= link_to 'View Details', shirt_path(shirt) %>
+        <%= shirt.name %> - <%= number_to_currency(shirt.price) %>
+        <%= link_to 'Edit', edit_shirt_path(shirt) %>
+        <%= link_to 'Delete', shirt, method: :delete, data: { confirm: 'Are you sure?' } %>
       </li>
     <% end %>
   </ul>
 <% else %>
-  <p>No shirts available.</p>
+  <p>No shirts for sale yet.</p>
 <% end %>

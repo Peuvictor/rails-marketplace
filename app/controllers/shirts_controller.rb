@@ -4,10 +4,19 @@ class ShirtsController < ApplicationController
   before_action :authorize_user!, only: [:update, :destroy]
 
   def index
-    if params[:query].present?
-      @shirts = Shirt.search_by_attributes(params[:query])
-    else
-      @shirts = Shirt.all
+    @shirts = if params[:query].present?
+                Shirt.search_by_attributes(params[:query])
+              else
+                Shirt.all
+              end
+
+    if params[:country].present?
+      normalized_country = params[:country].downcase
+      if normalized_country == "brasil"
+        @shirts = @shirts.where("lower(country) = ?", normalized_country)
+      elsif normalized_country == "other countries"
+        @shirts = @shirts.where("lower(country) != ?", "brasil")
+      end
     end
   end
 
@@ -45,10 +54,16 @@ class ShirtsController < ApplicationController
   end
 
   def purchase
-    # Atualizar ou excluir os registros dependentes
-    @shirt.orders.update_all(shirt_id: nil) # ou você pode excluir os registros relacionados
-    @shirt.destroy
-    redirect_to root_path, notice: 'Shirt was successfully purchased .', status: :see_other
+    @order = Order.new(shirt: @shirt, user: current_user, payment_method: params[:payment_method], acquisition_date: Time.now)
+    if @order.save
+      # Exclui os pedidos relacionados
+      Order.where(shirt_id: @shirt.id).delete_all
+      @shirt.destroy
+      redirect_to user_path(current_user), notice: 'Purchase was successfully completed.'
+    else
+      Rails.logger.error "Order creation failed: #{@order.errors.full_messages.join(', ')}"
+      redirect_to shirt_path(@shirt), alert: 'Error completing purchase.'
+    end
   end
 
   private

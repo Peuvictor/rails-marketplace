@@ -11,6 +11,7 @@
 
 .card:hover {
   transform: translateY(-5px);
+  color: #5a5a5a;
 }
 
 .card img {
@@ -24,6 +25,10 @@
 
 .card .content {
   padding: 20px;
+  display: flex;
+  flex-direction: column; /* Empilha conteúdo e preço verticalmente */
+  justify-content: space-between; /* Distribui o espaço verticalmente */
+  height: 100%; /* Para que o contêiner flexível ocupe toda a altura da div */
 }
 
 .card .name {
@@ -52,4 +57,12 @@
 
 .card .button:hover {
   background-color: #FF724B;
+}
+
+.card .price {
+  text-align: right;
+  font-size: 16px;
+  margin-top: auto;
+  font-weight: bold;
+  color: #4e4e4e;
 }

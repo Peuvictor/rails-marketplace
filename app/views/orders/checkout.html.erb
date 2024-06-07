@@ -1,4 +1,3 @@
-<!-- checkout.html.erb -->
 <h1>Checkout</h1>
 
 <div class="shirt-details">
@@ -10,7 +9,7 @@
 </div>
 
 <div class="payment-form">
-  <%= form_with url: purchase_shirt_path(@shirt), method: :post do |form| %>
+  <%= form_with url: purchase_shirt_path(@shirt), method: :post, local: true do |form| %>
     <div class="form-group">
       <%= form.label :payment_method, "Payment Method:" %>
       <%= form.select :payment_method, options_for_select(["Credit Card", "Bank Slip", "PIX"]), class: 'form-control', required: true %>

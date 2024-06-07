@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @shirts = @user.shirts
+    @user = User.includes(:shirts).find(params[:id])
   end
 
   private
@@ -14,5 +14,3 @@ class UsersController < ApplicationController
     end
   end
 end
-
-

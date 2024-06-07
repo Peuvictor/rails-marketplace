@@ -69,16 +69,18 @@ class ShirtsController < ApplicationController
 
   def purchase
     @order = Order.new(shirt: @shirt, user: current_user, payment_method: params[:payment_method], acquisition_date: Time.now)
+
     if @order.save
-      # Exclui os pedidos relacionados
       Order.where(shirt_id: @shirt.id).delete_all
       @shirt.destroy
-      redirect_to user_path(current_user), notice: 'Purchase was successfully completed.'
+      redirect_to user_path(current_user.id), notice: 'Purchase was successfully completed.'
     else
-      Rails.logger.error "Order creation failed: #{@order.errors.full_messages.join(', ')}"
+      Rails.logger.error "Order creation failed: #{order.errors.full_messages.join(', ')}"
       redirect_to shirt_path(@shirt), alert: 'Error completing purchase.'
     end
   end
+
+
 
   private
 

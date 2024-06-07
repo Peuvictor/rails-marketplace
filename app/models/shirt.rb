@@ -14,6 +14,7 @@ class Shirt < ApplicationRecord
   validates :team, presence: true
   validates :year, presence: true, length: { minimum: 4, maximum: 4 }
   validates :description, presence: true
+  attribute :sold, :boolean, default: false
 
   pg_search_scope :search_by_attributes,
                   against: { name: 'A', description: 'B', country: 'C', team: 'B', year: 'D', size: 'C', color: 'D' },

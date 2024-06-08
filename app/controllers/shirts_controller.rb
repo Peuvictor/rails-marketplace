@@ -62,7 +62,10 @@ class ShirtsController < ApplicationController
   end
 
   def update
-    if @shirt.update(shirt_params)
+    if params[:shirt][:photos].present?
+      @shirt.photos.attach(params[:shirt][:photos])
+    end
+    if @shirt.update(shirt_params.except(:photos))
       redirect_to shirts_path, notice: 'Shirt was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity

@@ -13,14 +13,13 @@
   </head>
 
   <body>
-    <!-- Navbar -->
-    <%= render "shared/navbar" %>
-
-    <!-- Main Content -->
-    <!-- Flash Messages -->
-    <%= render "shared/flashes" %>
-    <%= yield %>
-    <%= render "shared/footer" %>
-
+    <div class="wrapper">
+      <%= render "shared/navbar" %>
+      <%= render "shared/flashes" %>
+      <main>
+      <%= yield %>
+      </main>
+      <%= render "shared/footer" %>
   </body>
+    </div>
 </html>

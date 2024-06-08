@@ -32,7 +32,14 @@ class ShirtsController < ApplicationController
         @shirts = @shirts.where("lower(team) = ?", params[:team].downcase)
       end
     end
+
+    # Remove camisetas que foram compradas
+    @shirts = @shirts.where.not(id: Order.select(:shirt_id))
+
+    # Ordena as camisetas (opcional)
+    @shirts = @shirts.order(created_at: :desc)
   end
+
 
   def show
   end
@@ -55,7 +62,10 @@ class ShirtsController < ApplicationController
   end
 
   def update
-    if @shirt.update(shirt_params)
+    if params[:shirt][:photos].present?
+      @shirt.photos.attach(params[:shirt][:photos])
+    end
+    if @shirt.update(shirt_params.except(:photos))
       redirect_to shirts_path, notice: 'Shirt was successfully updated.', status: :see_other
     else
       render :edit, status: :unprocessable_entity
@@ -71,15 +81,12 @@ class ShirtsController < ApplicationController
     @order = Order.new(shirt: @shirt, user: current_user, payment_method: params[:payment_method], acquisition_date: Time.now)
 
     if @order.save
-      Order.where(shirt_id: @shirt.id).delete_all
-      @shirt.destroy
       redirect_to user_path(current_user.id), notice: 'Purchase was successfully completed.'
     else
       Rails.logger.error "Order creation failed: #{order.errors.full_messages.join(', ')}"
       redirect_to shirt_path(@shirt), alert: 'Error completing purchase.'
     end
   end
-
 
 
   private

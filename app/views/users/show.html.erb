@@ -4,12 +4,11 @@
 
 
   <% if @user.shirts.any? %>
+    <h3>Camisas compradas</h3>
     <ul>
       <% @user.shirts.each do |shirt| %>
         <li>
-          <%= shirt.name %> - <%= number_to_currency(shirt.price) %>
-          <%= link_to 'Edit', edit_shirt_path(shirt) %>
-          <%= link_to 'Delete', shirt, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= shirt.name %> - RS <%= shirt.price %>
         </li>
       <% end %>
     </ul>

@@ -6,22 +6,22 @@
     <div class="row mb-3" class="filter">
       <div class="col-md-4 col-sm-6 col-lg-3">
         <div class="form-group">
-          <%= form.select :country, options_for_select(["All Countries", "Brasil", "Espanha", "Inglaterra", "Italia", "Other Countries"], params[:country]), {prompt: "Select Country"}, { class: "form-control w-100" } %>
+          <%= form.select :country, options_for_select(["All Countries", "Brasil", "Espanha", "Inglaterra", "Italia", "Other Countries"], params[:country]), {prompt: "Select Country"}, { class: "form-control w-100 m-2" } %>
         </div>
       </div>
       <div class="col-md-4 col-sm-6 col-lg-3">
         <div class="form-group">
-          <%= form.select :size, options_for_select(["All Sizes", "PP", "P", "M", "G", "GG"], params[:size]), {prompt: "Select Size"}, {class: "form-control w-100"} %>
+          <%= form.select :size, options_for_select(["All Sizes", "PP", "P", "M", "G", "GG"], params[:size]), {prompt: "Select Size"}, {class: "form-control w-100 m-2"} %>
         </div>
       </div>
       <div class="col-md-4 col-sm-6 col-lg-3">
         <div class="form-group">
-          <%= form.select :team, options_for_select(["All Teams", "Cruzeiro", "Flamengo", "Vasco", "Corinthians", "Barcelona", "Real Madrid", "Manchester", "Juventus", "Other Teams"], params[:team]), {prompt: "Select Team"}, {class: "form-control w-100"} %>
+          <%= form.select :team, options_for_select(["All Teams", "Cruzeiro", "Flamengo", "Vasco", "Corinthians", "Barcelona", "Real Madrid", "Manchester", "Juventus", "Other Teams"], params[:team]), {prompt: "Select Team"}, {class: "form-control w-100 m-2"} %>
         </div>
       </div>
       <div class="col-md-4 col-sm-6 col-lg-3">
         <div class="form-group">
-          <%= form.submit "Search", class: "btn btn-primary btn-block" %>
+          <%= form.submit "Search", class: "btn btn-primary btn-block m-2" %>
            <% if params[:query].present? || params[:country].present? || params[:size].present? || params[:team].present? %>
               <%= link_to "Refresh", shirts_path, class:  "btn btn-primary btn-block" %>
             <% end %>
